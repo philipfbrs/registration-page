@@ -5,6 +5,7 @@ import * as yup from "yup";
 import Stepper from "./Stepper";
 import axios from "axios";
 import Swal from "sweetalert2";
+// import containerImg from "../../..public/pexels-andrea-piacquadio-3758114.jpg";
 // import swal from "sweetalert2/src/sweetalert2.js";
 
 export const Main = () => {
@@ -148,15 +149,14 @@ export const Main = () => {
     if (data && data.success === true) {
       //   swal.close();
       Swal.fire("Account Created", data.msg, "success");
-      setOldData({})
-      setCurrentStep(1)
+      setOldData({});
+      setCurrentStep(1);
     } else {
       Swal.fire("Oops!", data.msg, "error");
     }
 
-     setIsSubmitting(false);
+    setIsSubmitting(false);
   };
-
 
   const values = watch();
 
@@ -179,7 +179,9 @@ export const Main = () => {
 
   return (
     <div className="w-full h-full sm:h-[700px] sm:w-[1200px] bg-white rounded-none sm:rounded-3xl flex justify-center mx-0 sm:mx-4">
-      <div className="w-[80%] bg-blue-500 lg:block hidden rounded-l-3xl"></div>
+      <div className="w-[80%] bg-blue-500 lg:block hidden rounded-l-3xl">
+        <img className="w-full h-full object-cover object-left  rounded-l-3xl" src='pexels-andrea-piacquadio-3758114.jpg' />
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full flex h-full flex-col justify-between items-center p-2 sm:p-8"
