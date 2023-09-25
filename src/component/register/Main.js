@@ -189,7 +189,7 @@ export const Main = () => {
         <div className="flex flex-col justify-center items-center   mt-8 sm:mt-0">
           <h1 className="font-bold text-green-800 p-0 m-3">Registration</h1>
 
-          <h2>We offer products!</h2>
+          <h2>We offer Car Services!</h2>
           <div className="pt-4 pb-6 w-full">
             <Stepper
               steps={steps}
