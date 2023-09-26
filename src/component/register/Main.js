@@ -22,7 +22,7 @@ export const Main = () => {
       confirmPassword: yup
         .string()
         .oneOf([yup.ref("password"), null], "Passwords must match"),
-      password: yup.string().required("Password is required!"),
+      password: yup.string().required("Password is required!").min(5, 'Minimum of 5 characters'),
 
       type: yup.string().when("currentStep", {
         is: (currentStep) => {
@@ -127,35 +127,41 @@ export const Main = () => {
   };
 
   const handleSubmitData = async (payload) => {
+    setIsSubmitting(true);
     delete payload.confirmPassword;
     delete payload.currentStep;
-    setIsSubmitting(true);
+
     Swal.fire({
       title: "Please wait...",
+      allowOutsideClick: false
     });
     Swal.showLoading();
-    const response = await axios.post(
-      "https://renting-api.onrender.com/users/register",
-      payload,
-      {
-        headers: {
-          Authorization: "Bearer " + "6nv9i5abfaipo2yks0vku611ut9y7x",
-        },
+    try {
+      const response = await axios.post(
+        "https://renting-api.onrender.com/users/register",
+        payload,
+        {
+          headers: {
+            Authorization: "Bearer " + "6nv9i5abfaipo2yks0vku611ut9y7x",
+          },
+        }
+      );
+      Swal.close();
+      const { data } = response;
+
+      if (data && data.success === true) {
+        //   swal.close();
+        Swal.fire("Account Created", data.msg, "success");
+        setOldData({});
+        setCurrentStep(1);
+        setIsSubmitting(false);
+      } else {
+        Swal.fire("Oops!", data.msg, "error");
+        setIsSubmitting(false);
       }
-    );
-    Swal.close();
-    const { data } = response;
-
-    if (data && data.success === true) {
-      //   swal.close();
-      Swal.fire("Account Created", data.msg, "success");
-      setOldData({});
-      setCurrentStep(1);
-    } else {
-      Swal.fire("Oops!", data.msg, "error");
+    } catch (err) {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   };
 
   const values = watch();
@@ -180,15 +186,22 @@ export const Main = () => {
   return (
     <div className="w-full h-full sm:h-[700px] sm:w-[1200px] bg-white rounded-none sm:rounded-3xl flex justify-center mx-0 sm:mx-4">
       <div className="w-[80%] bg-blue-500 lg:block hidden rounded-l-3xl">
-        <img className="w-full h-full object-cover object-left  rounded-l-3xl" src='pexels-andrea-piacquadio-3758114.jpg' />
+        <img
+          className="w-full h-full object-cover object-left  rounded-l-3xl"
+          src="pexels-andrea-piacquadio-3758114.jpg"
+        />
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full flex h-full flex-col justify-between items-center p-2 sm:p-8"
       >
         <div className="flex flex-col justify-center items-center   mt-8 sm:mt-0">
-          <h1 className="font-bold text-green-800 p-0 m-3 text-4xl
-          ">Registration</h1>
+          <h1
+            className="font-bold text-green-800 p-0 m-3 text-4xl
+          "
+          >
+            Registration
+          </h1>
 
           <h2>We offer Car Services!</h2>
           <div className="pt-4 pb-6 w-full">
