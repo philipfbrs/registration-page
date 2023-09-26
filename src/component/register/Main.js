@@ -170,19 +170,12 @@ export const Main = () => {
   const handleBack = () => {
     setOldData({ ...values });
     setCurrentStep(1);
-    // setValue("currentStep", 1);
   };
   useEffect(() => {
     reset(defaultValues);
   }, [defaultValues]);
 
-  //   useEffect(() => {
-  //     reset(defaultStep);
-  //   }, [defaultStep]);
 
-  //   useEffect(() => {
-  //     console.log(values);
-  //   }, [values]);
 
   return (
     <div className="w-full h-full sm:h-[700px] sm:w-[1200px] bg-white rounded-none sm:rounded-3xl flex justify-center mx-0 sm:mx-4">
