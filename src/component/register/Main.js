@@ -98,10 +98,6 @@ export const Main = () => {
     };
   }, [currentStep, oldData]);
 
-  //   const defaultStep = useMemo(() => {
-  //     return { currentStep: currentStep };
-  //   }, [currentStep]);
-
   const {
     register,
     handleSubmit,
@@ -112,8 +108,6 @@ export const Main = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues,
-    // defaultStep,
-    // defaultValuesPartTwo,
   });
 
   const onSubmit = async (data) => {
@@ -121,8 +115,6 @@ export const Main = () => {
       setOldData({ ...data });
       return setCurrentStep(2);
     }
-    //   setValue("currentStep", 2);
-
     return handleSubmitData(data);
   };
 
@@ -150,7 +142,6 @@ export const Main = () => {
       const { data } = response;
 
       if (data && data.success === true) {
-        //   swal.close();
         Swal.fire("Account Created", data.msg, "success");
         setOldData({});
         setCurrentStep(1);
