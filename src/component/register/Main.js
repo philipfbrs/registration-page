@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 // import swal from "sweetalert2/src/sweetalert2.js";
 
 export const Main = () => {
-  const steps = ["Part One", "Part Two"];
+  const steps = ["Step One", "Step Two"];
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
 
