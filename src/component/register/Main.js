@@ -161,6 +161,7 @@ export const Main = () => {
       }
     } catch (err) {
       setIsSubmitting(false);
+      Swal.close();
     }
   };
 
